@@ -35,19 +35,11 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(user => {
-        user.getToken().then(function(token) {
-          $rootScope.userLoginToken = token;
-          console.log(token);
-        });
-        LocalStorage.storeData("user_id", user.user.uid).then(() => {
-          console.log(user);
-          // this.setState({ loader: false });
-        });
+        LocalStorage.storeData("user_id", user.user.uid);
 
-        // Actions.NoteList();
+        Actions.NoteList();
       })
       .catch(e => {
-        // this.setState({ loader: false });
         alert(e.message);
       });
   }
